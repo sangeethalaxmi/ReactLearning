@@ -2,73 +2,39 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-// it is core thing in react and no need react dom
-//{}--> give attributes to tag..we can add custom defined also
-const h1 = React.createElement(
-  "h1",
-  { className: "heading", abc: "this is react app", key: "tet" },
-  "Hello world i am sangeetha"
-);
-console.log(h1); //this is object .. it create a object with props passed to it
 
-//create need root to do all manuplation..when we ned to h1 into root ..we need to create root
-// everything will render in the root
-// we make div with id root as root element for react to work with it
-// react only works with elements inside root and all other html elements outside or root remains unchanged
-// this is reason why react is library not framework
+//core syntax of react
+// const h1 = React.createElement("h1", {}, "Hi this is react");
+// console.log(h1);
+// JSX ==> react.createElemnet(through babel inside parcel) =>react object => HTML element(render do this)
+const jsxh1 = <h1 className="test">Hi this is react</h1>;
+// functional components -> a function reutrns a jsx or react element then it is called functional component
+const HeadingComponent = () => {
+  return <h2>namesta react app</h2>;
+};
+//component compositition --> we are composing the one component to another component
+const Header = () => (
+  <div>
+    <h1>namesta react app1</h1>
+    <HeadingComponent />
+  </div>
+);
+let number = 1000;
+const title = <h4>Hi this is title of element</h4>;
+const Component2 = () => {
+  return (
+    <div>
+      <h2>component 2 {number + 200}</h2>
+      <h3>{console.log("test")}</h3>
+      <div>{title}</div>
+      <Component3 />
+      {/* can we call function inside component - yes */}
+      {Component3()}
+    </div>
+  );
+};
+const Component3 = () => <h3>component 3</h3>;
+//both of above code are same
+// both above console is same
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-const h2 = React.createElement("h2", {}, "Hello react app");
-// render .. it convert h1 object to tags and render to roto
-
-// nested structure
-// ReactElement(object) ==> HTML (browser understands)
-/**
- * <div id = 'parent'>
- *  <div id = 'child'>
- *       <h1>
- *      </h1>
- * </div>
- * </div>
- */
-const nestedDiv = React.createElement(
-  "div",
-  { id: "parent" },
-  React.createElement(
-    "div",
-    { id: "child" },
-    React.createElement("h1", {}, "I am hi tag")
-  )
-);
-// create silbing in react -- array of children
-/**
- * <div id = 'parent'>
- *  <div id = 'child'>
- *       <h1> </h1>
- *          <h2></h2>
- * </div>
- * </div>
- */
-const nestedDivsilbing = React.createElement(
-  "div",
-  { id: "parent" },
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "I am hi tag"),
-    React.createElement("h2", {}, "I am h2 tag(nested child)"),
-  ])
-);
-console.log(nestedDivsilbing);
-// nested structure
-const nestedDoublediv = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "I am hi tag"),
-    React.createElement("h2", {}, "I am h2 tag(nested child)"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "I am child 2 h1 tag"),
-    React.createElement("h2", {}, "I am child 2 h2 tag"),
-  ]),
-]);
-// above code is very ugly and to overcome this we use jsx
-// manuplating dom elements with react
-root.render([h1]); // to render multiple tags we use render with array
+root.render(<Component2 />);
