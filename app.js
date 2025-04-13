@@ -3,38 +3,938 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//core syntax of react
-// const h1 = React.createElement("h1", {}, "Hi this is react");
-// console.log(h1);
-// JSX ==> react.createElemnet(through babel inside parcel) =>react object => HTML element(render do this)
-const jsxh1 = <h1 className="test">Hi this is react</h1>;
-// functional components -> a function reutrns a jsx or react element then it is called functional component
-const HeadingComponent = () => {
-  return <h2>namesta react app</h2>;
-};
-//component compositition --> we are composing the one component to another component
-const Header = () => (
-  <div>
-    <h1>namesta react app1</h1>
-    <HeadingComponent />
-  </div>
-);
-let number = 1000;
-const title = <h4>Hi this is title of element</h4>;
-const Component2 = () => {
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const Header = () => {
   return (
-    <div>
-      <h2>component 2 {number + 200}</h2>
-      <h3>{console.log("test")}</h3>
-      <div>{title}</div>
-      <Component3 />
-      {/* can we call function inside component - yes */}
-      {Component3()}
+    <div className="header">
+      <div className="logo-container">
+        <img
+          className="logo"
+          src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png?nwm=1&nws=1&industry=fast-food&sf=&txt_keyword=All"
+        />
+      </div>
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About us</li>
+          <li>Cart</li>
+          <li>Login</li>
+        </ul>
+      </div>
     </div>
   );
 };
-const Component3 = () => <h3>component 3</h3>;
-//both of above code are same
-// both above console is same
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Component2 />);
+
+const RestroCards = (props) => {
+  console.log(props);
+  const { resData } = props;
+  const {
+    cloudinaryImageId,
+    name,
+    cuisines,
+    avgRatingString,
+    sla,
+    costForTwo,
+  } = resData?.info;
+  return (
+    <div className="res-card">
+      <img
+        className="res-logo"
+        src={
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+          cloudinaryImageId
+        }
+      ></img>
+      <h3>{name}</h3>
+      <h5>{cuisines.join(",")}</h5>
+      <div className="res-card-footer">
+        <h6>{avgRatingString}</h6>
+        <h6>{sla?.slaString}</h6>
+        <h6>${costForTwo} </h6>
+      </div>
+    </div>
+  );
+};
+/*const resObj = [
+  {
+    "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+    info: {
+      id: "234875",
+      name: "Adil Hotel",
+      cloudinaryImageId: "gp1ityra6utvzqn6ghnv",
+      locality: "Rautha Wada",
+      areaName: "Chhindwara Locality",
+      costForTwo: "₹150 for two",
+      cuisines: ["North Indian", "Biryani", "Tandoor"],
+      avgRating: 4.3,
+      parentId: "27123",
+      avgRatingString: "4.3",
+      totalRatingsString: "1.2K+",
+      sla: {
+        deliveryTime: 49,
+        lastMileTravel: 11.5,
+        serviceability: "SERVICEABLE",
+        slaString: "45-50 mins",
+        lastMileTravelString: "11.5 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-14 00:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "ITEMS",
+        subHeader: "AT ₹129",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-5c243b40-fda3-4654-859f-2442ecbcf93c",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/adil-hotel-rautha-wada-chhindwara-locality-rest234875",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+    info: {
+      id: "912754",
+      name: "Urban Cafe",
+      cloudinaryImageId:
+        "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/21/dbe91f1f-b400-4f4b-a78d-c6b99bdc61c5_912754.JPG",
+      locality: "SOUTH CIVIL LINE",
+      areaName: "Chhindwara City",
+      costForTwo: "₹300 for two",
+      cuisines: ["Snacks", "Pizzas", "Pastas", "Fast Food", "Burgers", "Cafe"],
+      avgRating: 4.4,
+      veg: true,
+      parentId: "1330",
+      avgRatingString: "4.4",
+      totalRatingsString: "8",
+      sla: {
+        deliveryTime: 65,
+        lastMileTravel: 11.4,
+        serviceability: "SERVICEABLE",
+        slaString: "60-65 mins",
+        lastMileTravelString: "11.4 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 23:00:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "v1695133679/badges/Pure_Veg111.png",
+            description: "pureveg",
+          },
+        ],
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV2: {},
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "pureveg",
+                  imageId: "v1695133679/badges/Pure_Veg111.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-5c243b40-fda3-4654-859f-2442ecbcf93c",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/urban-cafe-south-civil-line-chhindwara-city-rest912754",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+];*/
+const resObj = [
+  {
+    info: {
+      id: "234875",
+      name: "Adil Hotel",
+      cloudinaryImageId: "gp1ityra6utvzqn6ghnv",
+      locality: "Rautha Wada",
+      areaName: "Chhindwara Locality",
+      costForTwo: "₹150 for two",
+      cuisines: ["North Indian", "Biryani", "Tandoor"],
+      avgRating: 4.3,
+      parentId: "27123",
+      avgRatingString: "4.3",
+      totalRatingsString: "1.2K+",
+      sla: {
+        deliveryTime: 41,
+        lastMileTravel: 11.5,
+        serviceability: "SERVICEABLE",
+        slaString: "40-45 mins",
+        lastMileTravelString: "11.5 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-14 00:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "ITEMS",
+        subHeader: "AT ₹129",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/adil-hotel-rautha-wada-chhindwara-locality-rest234875",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "151518",
+      name: "Bakery World",
+      cloudinaryImageId: "mt2aggiscfl3yviatwng",
+      locality: "Parasia Road",
+      areaName: "Parasia Road",
+      costForTwo: "₹250 for two",
+      cuisines: ["Bakery", "Ice Cream", "Snacks", "Beverages"],
+      avgRating: 4.3,
+      veg: true,
+      parentId: "40363",
+      avgRatingString: "4.3",
+      totalRatingsString: "261",
+      sla: {
+        deliveryTime: 38,
+        lastMileTravel: 11.7,
+        serviceability: "SERVICEABLE",
+        slaString: "35-40 mins",
+        lastMileTravelString: "11.7 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 22:30:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "v1695133679/badges/Pure_Veg111.png",
+            description: "pureveg",
+          },
+        ],
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV2: {},
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "pureveg",
+                  imageId: "v1695133679/badges/Pure_Veg111.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/bakery-world-parasia-road-rest151518",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "150591",
+      name: "Satkar Restaurant",
+      cloudinaryImageId: "rvxp5xbniat84r6efku2",
+      locality: "Sinchai Colony",
+      areaName: "Satkar Chowk",
+      costForTwo: "₹250 for two",
+      cuisines: [
+        "North Indian",
+        "South Indian",
+        "Indian",
+        "Salads",
+        "Desserts",
+      ],
+      avgRating: 4.4,
+      veg: true,
+      parentId: "21553",
+      avgRatingString: "4.4",
+      totalRatingsString: "2.6K+",
+      sla: {
+        deliveryTime: 40,
+        lastMileTravel: 11.1,
+        serviceability: "SERVICEABLE",
+        slaString: "35-40 mins",
+        lastMileTravelString: "11.1 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 22:45:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "Rxawards/_CATEGORY-North%20Indian.png",
+            description: "Delivery!",
+          },
+        ],
+      },
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "Delivery!",
+                  imageId: "Rxawards/_CATEGORY-North%20Indian.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "ITEMS",
+        subHeader: "AT ₹49",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/satkar-restaurant-sinchai-colony-satkar-chowk-rest150591",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "625927",
+      name: "Kathi Junction",
+      cloudinaryImageId: "nigqvxgzvyxtfjuqasgg",
+      locality: "Bunglow Madhuvan Colony",
+      areaName: "Prasia Road",
+      costForTwo: "₹200 for two",
+      cuisines: ["rolls", "Burgers", "Pizzas", "Fast Food"],
+      avgRating: 4.1,
+      parentId: "1935",
+      avgRatingString: "4.1",
+      totalRatingsString: "344",
+      sla: {
+        deliveryTime: 52,
+        lastMileTravel: 12.2,
+        serviceability: "SERVICEABLE",
+        slaString: "50-55 mins",
+        lastMileTravelString: "12.2 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 23:30:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "₹150 OFF",
+        subHeader: "ABOVE ₹399",
+        discountTag: "FLAT DEAL",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/kathi-junction-bunglow-madhuvan-colony-prasia-road-rest625927",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "385824",
+      name: "The Belgian Waffle Co.",
+      cloudinaryImageId:
+        "RX_THUMBNAIL/IMAGES/VENDOR/2025/1/17/a38d20d7-bbb7-4b67-8bdd-7740e85cd4af_385824.JPG",
+      locality: "Sinchai Colony",
+      areaName: "Mohan Nagar",
+      costForTwo: "₹200 for two",
+      cuisines: ["Waffle", "Desserts", "Ice Cream", "Beverages"],
+      avgRating: 4.7,
+      veg: true,
+      parentId: "2233",
+      avgRatingString: "4.7",
+      totalRatingsString: "302",
+      sla: {
+        deliveryTime: 51,
+        lastMileTravel: 11.2,
+        serviceability: "SERVICEABLE",
+        slaString: "50-55 mins",
+        lastMileTravelString: "11.2 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 22:45:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "v1695133679/badges/Pure_Veg111.png",
+            description: "pureveg",
+          },
+        ],
+      },
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "pureveg",
+                  imageId: "v1695133679/badges/Pure_Veg111.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "₹200 OFF",
+        subHeader: "ABOVE ₹899",
+        discountTag: "FLAT DEAL",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/the-belgian-waffle-co-sinchai-colony-mohan-nagar-rest385824",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "151648",
+      name: "Mr. Gurung Momo & Chinese Corner",
+      cloudinaryImageId: "h7oibtpm7kqks8cqz3gh",
+      locality: "Teacher's Colony",
+      areaName: "Mohan Nagar",
+      costForTwo: "₹150 for two",
+      cuisines: ["Momos", "Chinese", "Fast Food"],
+      avgRating: 4.3,
+      veg: true,
+      parentId: "140255",
+      avgRatingString: "4.3",
+      totalRatingsString: "1.1K+",
+      sla: {
+        deliveryTime: 51,
+        lastMileTravel: 11.8,
+        serviceability: "SERVICEABLE",
+        slaString: "50-55 mins",
+        lastMileTravelString: "11.8 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 23:00:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "v1695133679/badges/Pure_Veg111.png",
+            description: "pureveg",
+          },
+        ],
+      },
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "pureveg",
+                  imageId: "v1695133679/badges/Pure_Veg111.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "ITEMS",
+        subHeader: "AT ₹49",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/mr-gurung-momo-and-chinese-corner-teachers-colony-mohan-nagar-rest151648",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "151649",
+      name: "Hotel Sai Nath & Sai Restaurant",
+      cloudinaryImageId: "vkhcohhmqfczycw9vsar",
+      locality: "railway station",
+      areaName: "Chhindwara Locality",
+      costForTwo: "₹200 for two",
+      cuisines: [
+        "North Indian",
+        "South Indian",
+        "Chinese",
+        "Beverages",
+        "Fast Food",
+        "Desserts",
+      ],
+      avgRating: 4.3,
+      veg: true,
+      parentId: "101802",
+      avgRatingString: "4.3",
+      totalRatingsString: "986",
+      sla: {
+        deliveryTime: 39,
+        lastMileTravel: 10.3,
+        serviceability: "SERVICEABLE",
+        slaString: "35-40 mins",
+        lastMileTravelString: "10.3 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 22:30:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "v1695133679/badges/Pure_Veg111.png",
+            description: "pureveg",
+          },
+        ],
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV2: {},
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "pureveg",
+                  imageId: "v1695133679/badges/Pure_Veg111.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/hotel-sai-nath-and-sai-restaurant-railway-station-chhindwara-locality-rest151649",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "184424",
+      name: "Sab Ghar Tak Foods",
+      cloudinaryImageId: "ryzswg44bt7thqzkuaj4",
+      locality: "Sanchar Colony",
+      areaName: "Parsia Road",
+      costForTwo: "₹200 for two",
+      cuisines: [
+        "North Indian",
+        "South Indian",
+        "Chinese",
+        "Beverages",
+        "Fast Food",
+        "Desserts",
+      ],
+      avgRating: 4.5,
+      parentId: "173932",
+      avgRatingString: "4.5",
+      totalRatingsString: "613",
+      sla: {
+        deliveryTime: 50,
+        lastMileTravel: 11.8,
+        serviceability: "SERVICEABLE",
+        slaString: "50-55 mins",
+        lastMileTravelString: "11.8 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 23:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "₹50 OFF",
+        subHeader: "ABOVE ₹199",
+        discountTag: "FLAT DEAL",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/sab-ghar-tak-foods-sanchar-colony-parsia-road-rest184424",
+      type: "WEBLINK",
+    },
+  },
+  {
+    info: {
+      id: "658210",
+      name: "The Fusion Lounge",
+      cloudinaryImageId: "fa4944f0cfdcbca2bec1f3ab8e3db3f7",
+      locality: "Triloki nagar",
+      areaName: "Railway Station",
+      costForTwo: "₹300 for two",
+      cuisines: [
+        "South Indian",
+        "Chinese",
+        "Beverages",
+        "Fast Food",
+        "Desserts",
+      ],
+      avgRating: 4.1,
+      veg: true,
+      parentId: "395453",
+      avgRatingString: "4.1",
+      totalRatingsString: "334",
+      sla: {
+        deliveryTime: 53,
+        lastMileTravel: 11.9,
+        serviceability: "SERVICEABLE",
+        slaString: "50-55 mins",
+        lastMileTravelString: "11.9 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2025-04-13 23:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "₹50 OFF",
+        subHeader: "ABOVE ₹129",
+        discountTag: "FLAT DEAL",
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+      externalRatings: {
+        aggregatedRating: {
+          rating: "--",
+        },
+      },
+      ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+    },
+    analytics: {
+      context: "seo-data-a803f428-7202-471d-b825-3c7f36ce41a1",
+    },
+    cta: {
+      link: "https://www.swiggy.com/city/chhindwara/the-fusion-lounge-triloki-nagar-railway-station-rest658210",
+      type: "WEBLINK",
+    },
+  },
+];
+const Restro = () => {
+  return (
+    <div className="restro-container">
+      {resObj.map((data, index) => {
+        return <RestroCards resData={data} key={data?.info.id} />;
+      })}
+    </div>
+  );
+};
+
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">search</div>
+    </div>
+  );
+};
+
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+      <Restro />
+    </div>
+  );
+};
+
+root.render(<AppLayout />);
