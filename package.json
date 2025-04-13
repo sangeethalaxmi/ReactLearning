@@ -1,0 +1,30 @@
+{
+  "name": "reactlearning",
+  "version": "1.0.0",
+  "description": "learning app",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sangeethalaxmi/ReactLearning.git"
+  },
+  "author": "sangeetha priya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sangeethalaxmi/ReactLearning/issues"
+  },
+  "homepage": "https://github.com/sangeethalaxmi/ReactLearning#readme",
+  "devDependencies": {
+    "parcel": "^2.14.4"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "browsersList": [
+    "last 2 versions"
+  ]
+}

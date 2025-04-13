@@ -1,9 +1,13 @@
+// importing the react from node modules to app.js .. this will throw a error..> Browser scripts cannot have imports or exports.
+
+import React from "react";
+import ReactDOM from "react-dom/client";
 // it is core thing in react and no need react dom
 //{}--> give attributes to tag..we can add custom defined also
 const h1 = React.createElement(
   "h1",
-  { className: "heading", abc: "test" },
-  "Hello world"
+  { className: "heading", abc: "this is react app", key: "tet" },
+  "Hello world i am sangeetha"
 );
 console.log(h1); //this is object .. it create a object with props passed to it
 
@@ -14,7 +18,7 @@ console.log(h1); //this is object .. it create a object with props passed to it
 // this is reason why react is library not framework
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const h2 = React.createElement("h2", {}, "Hello react");
+const h2 = React.createElement("h2", {}, "Hello react app");
 // render .. it convert h1 object to tags and render to roto
 
 // nested structure
@@ -67,4 +71,4 @@ const nestedDoublediv = React.createElement("div", { id: "parent" }, [
 ]);
 // above code is very ugly and to overcome this we use jsx
 // manuplating dom elements with react
-root.render([h1, h2, nestedDiv, nestedDivsilbing, nestedDoublediv]); // to render multiple tags we use render with array
+root.render([h1]); // to render multiple tags we use render with array
