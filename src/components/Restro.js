@@ -1,12 +1,23 @@
 import RestroCards from "./RestroCards";
 import resObj from "../utils/mockData";
+import Shimmer from "./Shimmer";
 const Restro = (props) => {
   const { listRestorent } = props;
+  // adding loading is not good way why?? .. there is concept of shimmer ui where we load fake page till we load ui
+  // conditional rendering - rendering based on condition
+  // if (listRestorent.length === 0) {
+  //   return <Shimmer />;
+  // }
+  // ternary operator
   return (
     <div className="restro-container">
-      {listRestorent.map((data, index) => {
-        return <RestroCards resData={data} key={data?.info.id} />;
-      })}
+      {listRestorent.length === 0 ? (
+        <Shimmer />
+      ) : (
+        listRestorent.map((data, index) => {
+          return <RestroCards resData={data} key={data?.info.id} />;
+        })
+      )}
     </div>
   );
 };

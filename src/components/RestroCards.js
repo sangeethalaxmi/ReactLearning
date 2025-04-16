@@ -1,7 +1,6 @@
 import { CDNURL } from "../utils/constants";
 
 const RestroCards = (props) => {
-  console.log(props);
   const { resData } = props;
   const {
     cloudinaryImageId,
