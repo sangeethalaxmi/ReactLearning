@@ -2,11 +2,13 @@
 import { useEffect, useState } from "react";
 import { LOGOURL } from "../utils/constants";
 import { Link } from "react-router";
+import useNetworkStatus from "../utils/useNetworkStatus";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleTextChange = () => {
     setIsLoggedIn((prev) => !prev);
   };
+  const onlineStatus = useNetworkStatus();
 
   // useEffect(() => {
   //   console.log(
@@ -31,6 +33,8 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>{onlineStatus ? "online" : "offline"}</li>
+
           <li>
             {/* we use link which is similr to <a href> to navigate to the pages without page reload */}
             <Link to="/contact">Contact</Link>
@@ -42,6 +46,10 @@ const Header = () => {
           <li>
             {" "}
             <Link to="/">Home</Link>
+          </li>
+          <li>
+            {" "}
+            <Link to="/grocery">Grocery</Link>
           </li>
           <button className="login" onClick={handleTextChange}>
             {isLoggedIn ? "Logout" : "Login"}

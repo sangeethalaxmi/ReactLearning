@@ -1,4 +1,5 @@
 import resObj from "../utils/mockData";
+import useNetworkStatus from "../utils/useNetworkStatus";
 import { Restro } from "./Restro";
 import { useState, useEffect } from "react";
 
@@ -72,6 +73,10 @@ const Body = () => {
     fetchData();
   }, []);
 
+  const onlineStatus = useNetworkStatus();
+  if (!onlineStatus) {
+    return <div>Please check the internet</div>;
+  }
   return (
     <div className="body">
       <div className="filter">
