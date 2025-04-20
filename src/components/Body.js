@@ -79,20 +79,31 @@ const Body = () => {
   }
   return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="m-2 pl-2">
           <input
             name="search"
-            className="search-box"
+            className="border border-solid "
             type="text"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           ></input>
-          <button onClick={handleSearch}> search</button>
+          <button
+            className="m-4 py-2 px-2 bg-purple-400 text-white rounded-lg"
+            onClick={handleSearch}
+          >
+            {" "}
+            search
+          </button>
         </div>
-        <button className="filter" onClick={handleFilter}>
-          top rated restorent
-        </button>
+        <div className="m-2 pl-2">
+          <button
+            className="m-4 py-2 px-2 bg-gray-200 text-black rounded-lg "
+            onClick={handleFilter}
+          >
+            top rated restorent
+          </button>
+        </div>
       </div>
       <Restro listRestorent={filteredRestro} />
     </div>

@@ -11,7 +11,7 @@ const Restro = (props) => {
   // }
   // ternary operator
   return (
-    <div className="restro-container">
+    <div className="flex flex-wrap gap-2 flex-row">
       {listRestorent.length === 0 ? (
         <Shimmer />
       ) : (

@@ -27,27 +27,27 @@ const Header = () => {
   // }, [isLoggedIn]);
 
   return (
-    <div className="header">
+    <div className="flex justify-between shadow-lg mb-2 bg-pink-100 items-center sm:bg-green-200">
       <div className="logo-container">
-        <img className="logo" src={LOGOURL} />
+        <img className="logo w-32" src={LOGOURL} />
       </div>
       <div className="nav-items">
-        <ul>
-          <li>{onlineStatus ? "online" : "offline"}</li>
+        <ul className="flex p-4 m-4 ">
+          <li className="px-4">{onlineStatus ? "online" : "offline"}</li>
 
-          <li>
+          <li className="px-4">
             {/* we use link which is similr to <a href> to navigate to the pages without page reload */}
             <Link to="/contact">Contact</Link>
           </li>
-          <li>
+          <li className="px-4">
             {" "}
             <Link to="/about">About us</Link>
           </li>
-          <li>
+          <li className="px-4">
             {" "}
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="px-4">
             {" "}
             <Link to="/grocery">Grocery</Link>
           </li>
