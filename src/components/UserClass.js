@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext.js";
 class UserClass extends React.Component {
   constructor(props) {
     super(props);
@@ -57,6 +58,11 @@ class UserClass extends React.Component {
         <h3>Location:{login}</h3>
         <h3>username:{bio}</h3>
         <h4>Count : {this.state.count}</h4>
+        <UserContext.Consumer>
+          {(data) => {
+            <h4>{data.loggedUser}</h4>;
+          }}
+        </UserContext.Consumer>
         <button
           onClick={() =>
             // never update the state directly

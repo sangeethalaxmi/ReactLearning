@@ -1,6 +1,6 @@
 // importing the react from node modules to app.js .. this will throw a error..> Browser scripts cannot have imports or exports.
 
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // lazy loading
@@ -23,11 +24,21 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 const AppLayout = () => {
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    setUser("Sangeetha Priya");
+  }, []);
   return (
+    // to update value of userContext theere is context provider throgh which we can send changed value
     <div className="app">
-      <Header />
-      {/* outlet is used to load the child elements that are children of appLayout based on url called */}
-      <Outlet />
+      <UserContext.Provider value={{ loggedUser: user }}>
+        <Header />
+        {/* outlet is used to load the child elements that are children of appLayout based on url called */}
+        {/* // we can also update the context value in other components by sending it as props */}
+        <UserContext.Provider value={{ loggedUser: user, setUser }}>
+          <Outlet />
+        </UserContext.Provider>
+      </UserContext.Provider>
     </div>
   );
 };

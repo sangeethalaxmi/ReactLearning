@@ -1,7 +1,8 @@
 import resObj from "../utils/mockData";
 import useNetworkStatus from "../utils/useNetworkStatus";
+import UserContext from "../utils/UserContext";
 import { Restro } from "./Restro";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // it is callback function
 const Body = () => {
@@ -18,6 +19,7 @@ const Body = () => {
   // console.log(arr[0]);
   // console.log(arr[1]);
   const [searchText, setSearchText] = useState("");
+  const { loggedUser, setUser } = useContext(UserContext);
   const handleFilter = () => {
     let filteredData = listRestorent.filter(
       (restro) => restro.info?.avgRating > 4.3
@@ -35,10 +37,9 @@ const Body = () => {
       // we need to render the component again with list of data .. can be done with setListRestroent
 
       let data2 = response?.data.cards.find((data) => {
-        console.log(data.card?.card?.id);
+        // console.log(data.card?.card?.id);
         return data.card?.card?.id == "restaurant_grid_listing_v2";
       });
-      console.log(data2);
       setListRestorent(
         data2.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
           (resdata) => {
@@ -46,6 +47,8 @@ const Body = () => {
           }
         )
       );
+      console.log(data2);
+
       setFilterRestro(
         data2.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
           (resdata) => {
@@ -103,6 +106,13 @@ const Body = () => {
           >
             top rated restorent
           </button>
+          <input
+            name="search"
+            className="border border-solid "
+            type="text"
+            value={loggedUser}
+            onChange={(e) => setUser(e.target.value)}
+          ></input>
         </div>
       </div>
       <Restro listRestorent={filteredRestro} />

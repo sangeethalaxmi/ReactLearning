@@ -1,14 +1,17 @@
 // named export import
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LOGOURL } from "../utils/constants";
 import { Link } from "react-router";
 import useNetworkStatus from "../utils/useNetworkStatus";
+import UserContext from "../utils/UserContext";
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleTextChange = () => {
     setIsLoggedIn((prev) => !prev);
   };
   const onlineStatus = useNetworkStatus();
+  // access the created usercontext and its data-->we can access it in all areas
+  const { loggedUser } = useContext(UserContext);
 
   // useEffect(() => {
   //   console.log(
@@ -54,6 +57,7 @@ const Header = () => {
           <button className="login" onClick={handleTextChange}>
             {isLoggedIn ? "Logout" : "Login"}
           </button>
+          <li>Logged user : {loggedUser}</li>
         </ul>
       </div>
     </div>
