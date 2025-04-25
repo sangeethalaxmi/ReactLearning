@@ -27,3 +27,12 @@
 16.different dev and production build
 
 #parcel --> it done all above with many packages --> parcel is like manager for all other packages
+
+redux
+-install @reduxjs/tookit and react-redux
+
+-build our own store
+-connect our store to app
+-create slice to add items to cart
+-dispatch action to update the store
+-read data with selector

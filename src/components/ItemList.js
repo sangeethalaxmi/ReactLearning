@@ -1,5 +1,13 @@
+import { useDispatch } from "react-redux";
 import { CDNURL } from "../utils/constants.js";
+import { addItem } from "../utils/cartSlice.js";
 const ItemList = ({ items }) => {
+  // dispatch a action so the cart slice updated with the data passed
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    // addItem action is exported from reducer and used it and pizza is action.payload
+    dispatch(addItem(item));
+  };
   return (
     <div>
       {items.map((item) => (
@@ -24,7 +32,13 @@ const ItemList = ({ items }) => {
               className="w-[125px] h-28 rounded-xl"
               src={CDNURL + item.card?.info?.imageId}
             />
-            <button className="absolute px-8 py-2 bg-white font-bold text-green-600 rounded-lg hover:bg-gray-200 top-[85%] left-[10%]">
+            <button
+              className="absolute px-8 py-2 bg-white font-bold text-green-600 rounded-lg hover:bg-gray-200 top-[85%] left-[10%]"
+              onClick={() => {
+                // function passed to anonymous function which will be called when we click add button
+                handleAddItem(item);
+              }}
+            >
               ADD
             </button>
           </div>

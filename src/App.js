@@ -11,6 +11,10 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appstore";
+import Cart from "./components/Cart";
+import CalculatePrime from "./components/Calculateprime";
 // import Grocery from "./components/Grocery";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // lazy loading
@@ -31,14 +35,17 @@ const AppLayout = () => {
   return (
     // to update value of userContext theere is context provider throgh which we can send changed value
     <div className="app">
-      <UserContext.Provider value={{ loggedUser: user }}>
-        <Header />
-        {/* outlet is used to load the child elements that are children of appLayout based on url called */}
-        {/* // we can also update the context value in other components by sending it as props */}
-        <UserContext.Provider value={{ loggedUser: user, setUser }}>
-          <Outlet />
+      {/* To provide the store to component we use provider from redux */}
+      <Provider store={appStore}>
+        <UserContext.Provider value={{ loggedUser: user }}>
+          <Header />
+          {/* outlet is used to load the child elements that are children of appLayout based on url called */}
+          {/* // we can also update the context value in other components by sending it as props */}
+          <UserContext.Provider value={{ loggedUser: user, setUser }}>
+            <Outlet />
+          </UserContext.Provider>
         </UserContext.Provider>
-      </UserContext.Provider>
+      </Provider>
     </div>
   );
 };
@@ -67,6 +74,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/prime",
+        element: <CalculatePrime />,
       },
     ],
     errorElement: <Error />,
