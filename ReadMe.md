@@ -36,3 +36,25 @@ redux
 -create slice to add items to cart
 -dispatch action to update the store
 -read data with selector
+
+Types of testing
+1.unit testing
+2.integration testing
+3.end to end testing
+
+1.unit testingg : Test react component in isolation ..eg:if we need to test headder component .. I will unit test header component alone to check whehter it is rendered properly or not -->one component in isolation
+2.integration testing : testing integration of component . component talk to each other .. there are so many component colabrated to form a module .. we will develop a flow to test it..eg:if application have card and if we search the input there are many component involved so we will test
+3.End to end testing : We will test from start to end .. login to logout .. similate the user flow
+-->it requires different type of tools like sypus etc
+
+we will focus of unit testing and integration testing
+
+libraries used for testing
+1.react testing library -->it is given by react to test application .. it has many react features
+along with create react app --> testing library comes with package --> it uses jest behind the screen
+2.jest --> it is javascript testing library --> it uses babel behind scene
+
+#setting up testing
+1.@testing-library/react
+2.install jest
+3.babel with dependency

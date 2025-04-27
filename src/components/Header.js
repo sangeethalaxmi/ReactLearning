@@ -22,7 +22,7 @@ const Header = () => {
   //  when there is change to some other data in store
   //  const data = useSelector((state)=>state);
   //  const items = data.cart.items;
-  console.log(cartItems);
+  // console.log(cartItems);
 
   // useEffect(() => {
   //   console.log(

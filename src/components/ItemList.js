@@ -14,6 +14,7 @@ const ItemList = ({ items }) => {
         <div
           key={item.card?.info?.id}
           className="p-4 m-2 mb-8  border-gray-400 border-b-2 flex justify-between items-center"
+          data-testid="items"
         >
           <div className="w-4/5">
             <div className="flex flex-col font-bold">

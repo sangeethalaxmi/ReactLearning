@@ -5,6 +5,7 @@ import UserContext from "../utils/UserContext";
 const RestroCards = (props) => {
   const { resData } = props;
   const { loggedUser } = useContext(UserContext);
+
   const {
     cloudinaryImageId,
     name,
@@ -13,9 +14,11 @@ const RestroCards = (props) => {
     sla,
     costForTwo,
   } = resData?.info;
-  console.log(resData?.info);
   return (
-    <div className="m-2 p-4 w-56 hover:border border-solid min-h-full rounded-md  overflow-hidden bg-gray-100 hover:bg-gray-200">
+    <div
+      data-testid="resCard"
+      className="m-2 p-4 w-56 hover:border border-solid min-h-full rounded-md  overflow-hidden bg-gray-100 hover:bg-gray-200"
+    >
       <img
         className="res-logo h-40 w-full rounded-lg"
         src={CDNURL + cloudinaryImageId}
@@ -36,6 +39,7 @@ const RestroCards = (props) => {
 export const withExcellentRating = (RestroCards) => {
   //return a component with exhanced version
   return (props) => {
+    console.log(props);
     return (
       <div>
         <div className="absolute bg-black text-white rounded-sm m-2">

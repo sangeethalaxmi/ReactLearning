@@ -24,11 +24,10 @@ const Body = () => {
     let filteredData = listRestorent.filter(
       (restro) => restro.info?.avgRating > 4.3
     );
-    setListRestorent(filteredData);
+    setFilterRestro(filteredData);
   };
   // it is similar to settimeout which is asycn i.e ueseEffect is called after component ui rendered and commit phase is over in react
   const fetchData = async () => {
-    console.log("test");
     try {
       const data = await fetch(
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.0168445&lng=76.9558321&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
@@ -47,7 +46,6 @@ const Body = () => {
           }
         )
       );
-      console.log(data2);
 
       setFilterRestro(
         data2.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
@@ -88,6 +86,7 @@ const Body = () => {
             name="search"
             className="border border-solid "
             type="text"
+            data-testid="search"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           ></input>
