@@ -1,0 +1,82 @@
+{
+  "info": {
+    "id": "76622",
+    "name": "Geetha Canteen",
+    "cloudinaryImageId": "9ada441cb7c256cd6ae4bbe45e667576",
+    "locality": "Mettupalayam Road",
+    "areaName": "Tatabad",
+    "costForTwo": "₹200 for two",
+    "cuisines": ["South Indian"],
+    "avgRating": 4.4,
+    "veg": true,
+    "parentId": "6459",
+    "avgRatingString": "4.4",
+    "totalRatingsString": "49K+",
+    "sla": {
+      "deliveryTime": 15,
+      "lastMileTravel": 1,
+      "serviceability": "SERVICEABLE",
+      "slaString": "15-20 mins",
+      "lastMileTravelString": "1.0 km",
+      "iconType": "ICON_TYPE_EMPTY"
+    },
+    "availability": {
+      "nextCloseTime": "2025-04-26 11:00:00",
+      "opened": true
+    },
+    "badges": {
+      "imageBadges": [
+        {
+          "imageId": "bolt/big%20RX%20listing%2018px.png",
+          "description": "bolt!"
+        }
+      ]
+    },
+    "isOpen": true,
+    "type": "F",
+    "badgesV2": {
+      "entityBadges": {
+        "imageBased": {
+          "badgeObject": [
+            {
+              "attributes": {
+                "description": "bolt!",
+                "imageId": "bolt/big%20RX%20listing%2018px.png"
+              }
+            }
+          ]
+        },
+        "textBased": {},
+        "textExtendedBadges": {}
+      }
+    },
+    "aggregatedDiscountInfoV3": {
+      "header": "₹125 OFF",
+      "subHeader": "ABOVE ₹249",
+      "discountTag": "FLAT DEAL"
+    },
+    "orderabilityCommunication": {
+      "title": {},
+      "subTitle": {},
+      "message": {},
+      "customIcon": {}
+    },
+    "differentiatedUi": {
+      "displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+      "differentiatedUiMediaDetails": {
+        "mediaType": "ADS_MEDIA_ENUM_IMAGE",
+        "lottie": {},
+        "video": {}
+      }
+    },
+    "reviewsSummary": {},
+    "displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+    "restaurantOfferPresentationInfo": {},
+    "externalRatings": {
+      "aggregatedRating": {
+        "rating": "--"
+      }
+    },
+    "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+  }
+}

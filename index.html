@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namasta React</title>
+    <link href="index.css" rel="stylesheet"/>
+    <!-- added react in project in header throws error as when the html is parsed and reaches script tag it tried to run before dom is loaded -->
+ <!-- core of react -->
+  <!-- we can use defer which tells user to download script now and use later -->
+<!-- <script crossorigin  defer src="https://unpkg.com/react@18/umd/react.development.js"></script>
+react dom which we need to modifiy dom
+<script crossorigin defer src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+why 2 fiels .. there are differrent places where react is used like mobile(react native) so first file have core react functionaltiies and second file is used to manuplate DOM in website or browser
+ <script defer src="./App.js"></script> -->
+</head>
+<body>
+    <!-- react is working only inside root and other part of html remains same -->
+   
+    <div id="root">
+        <!-- the content in the root tag get replaced by render method -->
+    </div>
+    
+</body>
+<!-- added react in project -->
+ <!-- core of react -->
+
+  <script type="module" src="./src/App.js"></script>
+  
+</html>
+
+
+
+
